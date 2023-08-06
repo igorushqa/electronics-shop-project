@@ -8,6 +8,14 @@ class TestItem:
         assert item.quantity == 20
         assert Item.all == [item]
 
+    def test_repr_item(self):
+        item1 = Item("Смартфон", 10000, 20)
+        assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+    def test_str_item(self):
+        item1 = Item("Смартфон", 10000, 20)
+        assert str(item1) == 'Смартфон'
+
     def test_calculate_total_price(self, item):
         assert item.calculate_total_price() == 200000
 
