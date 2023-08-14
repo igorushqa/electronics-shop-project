@@ -1,4 +1,5 @@
 from src.item import Item
+from src.phone import Phone
 
 
 class TestItem:
@@ -35,3 +36,10 @@ class TestItem:
         assert Item.string_to_number('5') == 5
         assert Item.string_to_number('5.0') == 5
         assert Item.string_to_number('5.5') == 5
+
+    def test_add_item(self):
+        item1 = Item("Смартфон", 10000, 20)
+        phone1 = Phone("iPhone 14", 120_000, 5, 2)
+        assert item1 + phone1 == 25
+        assert phone1 + phone1 == 10
+

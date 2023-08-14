@@ -30,7 +30,6 @@ class Item:
     def __str__(self):
         return f'{self.__name}'
 
-
     @property
     def name(self):
         return self.__name
@@ -71,3 +70,8 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только объекты Item и дочерние от них.')
+        return self.quantity + other.quantity
