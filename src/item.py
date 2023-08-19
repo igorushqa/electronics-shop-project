@@ -44,14 +44,19 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         cls.all = []
-        with open(cls.items_csv_path, 'r', encoding='windows-1251') as csv:
-            data = DictReader(csv)
-            for item in data:
-                cls(
-                    name=item['name'],
-                    price=cls.string_to_number(item['price']),
-                    quantity=cls.string_to_number(item['quantity'])
-                )
+        try:
+            with open(cls.items_csv_path, 'r', encoding='windows-1251') as csv:
+                data = DictReader(csv)
+                for item in data:
+                    cls(
+                        name=item['name'],
+                        price=cls.string_to_number(item['price']),
+                        quantity=cls.string_to_number(item['quantity'])
+                    )
+        except FileNotFoundError:
+            raise FileNotFoundError('Отсутствует файл item.csv')
+        except KeyError:
+            raise InstantiateCSVError('Файл item.csv поврежден')
 
     @staticmethod
     def string_to_number(decimal_string):
@@ -75,3 +80,8 @@ class Item:
         if not isinstance(other, Item):
             raise ValueError('Складывать можно только объекты Item и дочерние от них.')
         return self.quantity + other.quantity
+
+
+class InstantiateCSVError(Exception):
+    def __init__(self, *args, **kwargs):
+        print('_Файл item.csv поврежден_')

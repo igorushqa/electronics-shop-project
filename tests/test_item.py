@@ -1,3 +1,5 @@
+import pytest
+
 from src.item import Item
 from src.phone import Phone
 
@@ -43,3 +45,8 @@ class TestItem:
         assert item1 + phone1 == 25
         assert phone1 + phone1 == 10
 
+#    def test_instantiate_from_csv():
+#       with pytest.raises(FileNotFoundError):
+#            instantiate_from_csv()
+#        with pytest.raises(KeyError):
+#            instantiate_from_csv()
