@@ -42,10 +42,10 @@ class Item:
             self.__name = name[:10]
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, filename='../src/items.csv'):
         cls.all = []
         try:
-            with open(cls.items_csv_path, 'r', encoding='windows-1251') as csv:
+            with open(filename, 'r', encoding='windows-1251') as csv:
                 data = DictReader(csv)
                 for item in data:
                     cls(
